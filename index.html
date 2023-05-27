@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="icon" href="logo.png"> 
+    <title> EXAMEN PARCIAL N°1</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            
+                  <div id="centro">
+                    <h1>EXAMEN PARCIAL N°1</h1>
+                    <img class="circulo" src="/logo.png" alt="">
+                    
+    
+                    </div>
+                  
+            
+     </nav>
+    </header>
+   
+    <content>
+        <main>
+            <section id="centro">
+                <h4>
+                    Datos &#128187
+                </h4>
+                <form action="">
+
+                    <p>
+                        
+                        <input type="number" name="" id="txtCodigo" placeholder="Codigo:">
+                        <input type="number"   name="" id="txtPrecio" placeholder="Precio: ">
+                        <input type="text" name="" id="txtNombre" placeholder="Nombre: ">
+                        <input type="number" name="" id="txtStock" placeholder="Stock: ">
+                        
+                        
+                    </p>
+
+                     
+                        
+                    <p>
+                        <input type="button" value="Agregar" class="btn btn-success" onclick="Agregar()">
+                        <input type="button" value="ver Estadisticas" class="btn btn-primary" onclick="verEstadisticas()">
+                        
+                    </p>
+                        
+
+                </form>
+            </section>
+
+            <section id="centro">
+                <h4>
+                    Listado &#128203
+                </h4>
+                <table>
+
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Codigo</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        
+                        
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <hr>
+            </section>
+
+            <section id="left">
+                <h4 id="centro">Estadísticas &#128202</h4>
+                <form action="">
+
+                    <p>
+                        <label for=""> Cantidad total de articulos:</label>
+                        <label for="" id="lblCantidadArticulos" class="badge bg-secondary rounded-pill">$0 </label>
+                    </p>
+
+                    <p>
+                        <label for=""> Monto total acumulado en articulos($): </label>
+                        <label for="" id="lblAcumuladoArticulo" class="badge bg-secondary rounded-pill">0</label>
+                    </p>
+
+                    <p>
+                        <label for=""> Cantidad de articulos cuyo stock es menor a 5:</label>
+                        <label for="" id="lblMenorCinco" class="badge bg-secondary rounded-pill">0</label>
+                    </p>
+                    
+
+                </form>
+            </section>
+
+        </main>
+
+    </content>
+
+    <footer>
+        <h6>Carrera Analista de Sistemas - Institución Cervantes</h6>
+        <h6>Alumno: Agustin Cordoba y Gonzalo Torres</h6>
+        <h6>Matricula:27339 y 27348</h6>
+        
+    </footer> 
+
+
+
+    <script>
+
+        class Articulo {
+
+            constructor(){
+                this.Nombre,
+                this.Codigo,
+                this.Stock,
+                this.Precio
+            }
+            
+           
+        }
+
+
+    
+
+
+            
+           
+        
+
+    
+
+        let listaArticulos = [] ;
+        
+
+
+        function Agregar() {
+            const codigo = document.getElementById("txtCodigo")
+            const precio = document.getElementById("txtPrecio")
+            const nombre = document.getElementById("txtNombre")
+            const stock = document.getElementById("txtStock")
+           
+            
+
+
+            let oArticulo = new Articulo();
+            oArticulo.Codigo = codigo.value;
+            oArticulo.Precio = precio.value;
+            oArticulo.Nombre = nombre.value;
+            oArticulo.Stock = stock.value;
+            
+            
+
+            listaArticulos.push(oArticulo);
+
+            
+
+            //Listado
+
+            //TD
+            const td0 = document.createElement("td");
+            const td1 = document.createElement("td");
+            const td2 = document.createElement("td");
+            const td3 = document.createElement("td");
+           
+            
+
+            td0.innerHTML = nombre.value;
+            td1.innerHTML = codigo.value;
+            td2.innerHTML = stock.value;
+            td3.innerHTML = `$ ${precio.value}`;
+            
+           
+           
+
+
+            //TR
+            const tr = document.createElement("tr");
+            tr.appendChild(td0);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            
+            
+           
+
+
+            //TBODY
+            const tbody = document.querySelector("tbody");
+            tbody.appendChild(tr);
+
+
+
+
+
+
+            //Limpiar
+            nombre.value = "";
+            codigo.value = "";
+            stock.value = "";
+            precio.value = "";
+           
+            
+
+            //Foco
+            nombre.focus();
+
+        }
+
+         function verEstadisticas() {
+            console.log(listaArticulos);
+
+            //Venta total acumulado
+            let CantidadTotalAcum = 0;
+
+            //Monto Total en precio
+            let MontoTotalAcum=0;
+            
+
+            //MenorArticulo
+            let Cont = 0;  
+           
+            
+            
+           
+
+
+            for (let obj of listaArticulos) {
+
+                let o = new Articulo();
+                Object.assign(o,obj);
+
+                
+
+                //Cantidad Total Acumulada
+                CantidadTotalAcum = CantidadTotalAcum + parseFloat(o.Stock);
+                //Monto Total Acumulado en pesos
+                MontoTotalAcum = MontoTotalAcum + parseFloat(o.Precio);
+
+
+                //Articulo con stock menor a 5 
+               
+
+               if (o.Stock < 5) {
+                   Cont ++
+                
+
+                }
+
+               
+
+            
+
+            }
+            
+
+            const CantidadArticulos = document.getElementById("lblCantidadArticulos");
+            CantidadArticulos.innerHTML = CantidadTotalAcum;
+
+            const AcumuladoArticulo = document.getElementById("lblAcumuladoArticulo");
+            AcumuladoArticulo.innerHTML = MontoTotalAcum;
+
+            const MenorCinco = document.getElementById("lblMenorCinco");
+            MenorCinco.innerHTML = Cont;
+
+           
+        
+        }
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
